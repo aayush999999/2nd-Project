@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+{% block start %}
+
+<table>
+    <tr>
+        <td>Sl no.</td>
+        <td>Name</td>
+        <td>Description</td>
+        <td>Image</td>
+    </tr>
+
+{% for i in receipe %}
+<tr>
+    <td>{{ forloop.counter }}</td>
+    <td>{{ i.receipe_name }}</td>
+    <td>{{ i.receipe_description }}</td>
+    <td><img src="receipe"{{i.receipe_image}} ></td>
+
+</tr>
+{% endfor %}
+</table>
+
+{% endblock %}
