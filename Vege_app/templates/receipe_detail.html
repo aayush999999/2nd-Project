@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
 {% block start %}
-
 <table>
     <tr>
         <td>Sl no.</td>
@@ -15,7 +14,7 @@
     <td>{{ forloop.counter }}</td>
     <td>{{ i.receipe_name }}</td>
     <td>{{ i.receipe_description }}</td>
-    <td><img src="receipe"{{i.receipe_image}} ></td>
+    <td><img src="{{i.receipe_image}}" width="200" height="200" ></td>
 
 </tr>
 {% endfor %}
