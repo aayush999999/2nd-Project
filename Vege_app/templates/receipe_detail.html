@@ -1,21 +1,24 @@
 {% extends "base.html" %}
 {% load static %}
 {% block start %}
-<table>
+<table border="1" align="center" class="table table-striped-columns">
+    <a href="/"><b>HOME</b></a>
     <tr>
-        <td>Sl no.</td>
-        <td>Name</td>
-        <td>Description</td>
-        <td>Image</td>
+        <td><b>Sl no.</b></td>
+        <td><b>Name</b></td>
+        <td><b>Description</b></td>
+        <td><b>Image</b></td>
+        <td><b>Action</b></td>
     </tr>
 
 {% for i in receipe %}
 <tr>
-    <td>{{ forloop.counter }}</td>
-    <td>{{ i.receipe_name }}</td>
-    <td>{{ i.receipe_description }}</td>
-    <td><img src="{{i.receipe_image}}" width="200" height="200" ></td>
-
+    <td align="center"><b>{{ forloop.counter }}</b></td>
+    <td align="center">{{ i.receipe_name }}</td>
+    <td align="center">{{ i.receipe_description }}</td>
+    <td><img src="{{i.receipe_image}}" width="100" height="100" ></td>
+    <td><a href="/delete-receipe/{{i.id}}/" class="btn btn-danger">Delete</a></td>
+    
 </tr>
 {% endfor %}
 </table>

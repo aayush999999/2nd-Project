@@ -1,10 +1,11 @@
 from django.shortcuts import render,redirect
 from .models import *
+from django.http import HttpResponse
 
 # Create your views here.
 
 def home(request):
-    return render(request, 'receipes.html')
+    return render(request, 'home.html')
 
 
 def receipe(request):
@@ -35,3 +36,11 @@ def details(request):
     context = {'receipe': queryset }
     # print(context)
     return render(request, 'receipe_detail.html', context)
+
+
+def delete_receipe(request, id):
+    queryset = Receipe.objects.get(id=id)
+    print(id)
+    queryset.delete()
+    print(queryset)
+    return redirect('details')

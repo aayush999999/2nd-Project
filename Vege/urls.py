@@ -25,7 +25,7 @@ urlpatterns = [
     path('', home, name="home"),
     path('receipe', receipe, name="receipe"),
     path('details', details, name="details"),
-    
+    path('delete-receipe/<id>/', delete_receipe, name="delete_receipe"),
     
     
     path('admin/', admin.site.urls),
