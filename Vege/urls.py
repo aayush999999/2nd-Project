@@ -23,9 +23,10 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('', home, name="home"),
-    path('receipe', receipe, name="receipe"),
+    path('add-receipe', add_receipe, name="add_receipe"),
     path('details', details, name="details"),
     path('delete-receipe/<id>/', delete_receipe, name="delete_receipe"),
+    path('update-receipe/<id>/', update_receipe, name="update_receipe"),
     
     
     path('admin/', admin.site.urls),

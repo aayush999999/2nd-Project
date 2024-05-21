@@ -8,7 +8,7 @@ def home(request):
     return render(request, 'home.html')
 
 
-def receipe(request):
+def add_receipe(request):
     if request.method == "POST":
         data = request.POST
 
@@ -20,10 +20,10 @@ def receipe(request):
         receipe = Receipe(receipe_name = receipe_name, receipe_description = receipe_description, receipe_image = receipe_image)
         receipe.save()
 
-        return redirect('/receipe')
+        return redirect('/add-receipe')
     
 
-    return render(request, 'receipes.html')
+    return render(request, 'add_receipes.html')
 
 # def details(request):
 #     receipe = Receipe.objects.all()
@@ -44,3 +44,9 @@ def delete_receipe(request, id):
     queryset.delete()
     print(queryset)
     return redirect('details')
+
+
+def update_receipe(request, id):
+    queryset = Receipe.objects.get(id=id)
+
+    return render(request, 'update_detail.html')
