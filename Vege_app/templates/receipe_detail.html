@@ -2,23 +2,25 @@
 {% load static %}
 {% block start %}
 <table border="1" align="center" class="table table-striped-columns">
+    &nbsp;&nbsp;
     <a href="/"><b>HOME</b></a>
     <tr>
         <td><b>Sl no.</b></td>
         <td><b>Name</b></td>
         <td><b>Description</b></td>
         <td><b>Image</b></td>
-        <td><b>Action</b></td>
+        <td colspan="2" align="center"><b>Action</b></td>
     </tr>
 
-{% for i in receipe %}
+{% for i in receipes %}
 <tr>
     <td align="center"><b>{{ forloop.counter }}</b></td>
     <td align="center">{{ i.receipe_name }}</td>
     <td align="center">{{ i.receipe_description }}</td>
     <td><img src="{{i.receipe_image}}" width="100" height="100" ></td>
+
     <td><a href="/delete-receipe/{{i.id}}/" class="btn btn-danger">Delete</a></td>
-    <td><a href="/" class="btn btn-danger">Update</a></td>
+    <td><a href="/update-receipe/{{i.id}}/" class="btn btn-success">Update</a></td>
     
 </tr>
 {% endfor %}

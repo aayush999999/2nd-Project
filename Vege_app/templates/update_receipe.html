@@ -1,26 +1,29 @@
 {% extends "base.html" %}
 
 {% block start %}
+
 &nbsp;&nbsp;<a href="/"><b>HOME</b></a>
+&nbsp;&nbsp;
+<a href="/details"><b>Menu</b></a>&nbsp;&nbsp;
 <div class="container mt-5" align="center">
     <form class="col-6 mx-auto card p-3 shadow-lg mb-3" method="POST" enctype="multipart/form-data">
       {% csrf_token %}
         <div class="form-group">
-          <h1>Add Receipe</h1>
+          <h1>Update Receipe</h1>
           <hr>
           <label for="exampleInputEmail1">Receipe Name</label>
-          <input type="text" name="receipe_name" required class="form-control">
+          <input type="text" name="receipe_name" value="{{receipe.receipe_name}}" required class="form-control">
         </div>
         <div class="form-group">
           <label  for="exampleInputPassword1">Receipe Description</label>
-          <textarea name="receipe_description" required class="form-control"></textarea>
+          <textarea name="receipe_description" required class="form-control">{{receipe.receipe_description}}</textarea>
         </div>
         <div class="form-group">
             <label for="exampleInputPassword1">Receipe Image</label>
-            <input type="file" name="receipe_image" required class="form-control">
+            <input type="file" name="receipe_image" class="form-control">
           </div>
         
-        <button type="submit" class="btn btn-success">Add Receipe</button>
+        <button type="submit" class="btn btn-success">Update Receipe</button>
       </form>
 </div>
 

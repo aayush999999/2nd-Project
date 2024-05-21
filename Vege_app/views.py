@@ -12,7 +12,7 @@ def add_receipe(request):
     if request.method == "POST":
         data = request.POST
 
-        receipe_image = request.FILES['receipe_image']
+        receipe_image = request.FILES.get('receipe_image')
         receipe_name = data.get('receipe_name')
         receipe_description = data.get('receipe_description')
         # print(receipe_name)
@@ -33,7 +33,7 @@ def add_receipe(request):
 
 def details(request):
     queryset = Receipe.objects.all()
-    context = {'receipe': queryset }
+    context = {'receipes': queryset }
     # print(context)
     return render(request, 'receipe_detail.html', context)
 
@@ -47,6 +47,24 @@ def delete_receipe(request, id):
 
 
 def update_receipe(request, id):
-    queryset = Receipe.objects.get(id=id)
+    queryset = Receipe.objects.get(id = id)
 
-    return render(request, 'update_detail.html')
+    if request.method == "POST":
+        data = request.POST
+
+        receipe_image = request.FILES.get('receipe_image')
+        receipe_name = data.get('receipe_name')
+        receipe_description = data.get('receipe_description')
+
+        queryset.receipe_name = receipe_name
+        queryset.receipe_description = receipe_description
+        
+        if receipe_image:
+            queryset.receipe_image = receipe_image
+
+        queryset.save()
+        return redirect('/details')
+
+    context = {'receipe': queryset }
+    
+    return render(request, 'update_receipe.html', context )
