@@ -120,7 +120,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    BASE_DIR / "receipe",  # if any problem in upload img. then replace of "receipe" by "static"
 ]
 
 MEDIA_ROOT = BASE_DIR / 'media'

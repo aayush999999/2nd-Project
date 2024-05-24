@@ -1,11 +1,49 @@
 from django.shortcuts import render,redirect
 from .models import *
 from django.http import HttpResponse
+from django.contrib.auth.models import User
+from django.contrib import messages
 
 # Create your views here.
 
 def home(request):
     return render(request, 'home.html')
+
+
+def register_page(request):
+    if request.method == "POST":
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = User.objects.filter(username = username)
+        if user.exists():
+            messages.error(request, "Username Already Exsits...")
+            return redirect('/register')
+
+        user = User.objects.create(
+            first_name = first_name,
+            username = username,
+            last_name = last_name,  
+            password = password
+        )
+
+        user.set_password(password)
+        user.save()
+        
+        messages.success(request, "Account Created Successfully.")
+
+        return redirect('/login')
+
+    return render(request, 'register.html')
+
+
+def login_page(request):
+   
+
+
+    return render(request, 'login.html')
 
 
 def add_receipe(request):
@@ -15,7 +53,6 @@ def add_receipe(request):
         receipe_image = request.FILES.get('receipe_image')
         receipe_name = data.get('receipe_name')
         receipe_description = data.get('receipe_description')
-        # print(receipe_name)
 
         receipe = Receipe(receipe_name = receipe_name, receipe_description = receipe_description, receipe_image = receipe_image)
         receipe.save()
@@ -33,16 +70,16 @@ def add_receipe(request):
 
 def details(request):
     queryset = Receipe.objects.all()
+    if request.GET.get('search'):
+        queryset = queryset.filter(receipe_name__icontains = request.GET.get('search'))
     context = {'receipes': queryset }
-    # print(context)
+
     return render(request, 'receipe_detail.html', context)
 
 
 def delete_receipe(request, id):
     queryset = Receipe.objects.get(id=id)
-    print(id)
     queryset.delete()
-    print(queryset)
     return redirect('details')
 
 
@@ -68,3 +105,4 @@ def update_receipe(request, id):
     context = {'receipe': queryset }
     
     return render(request, 'update_receipe.html', context )
+
