@@ -25,6 +25,7 @@ urlpatterns = [
     path('', home, name="home"),
     path('register', register_page, name="register_page"),
     path('login', login_page, name="login_page"),
+    path('logout', logout_page, name="logout_page"),
     path('add-receipe', add_receipe, name="add_receipe"),
     path('details', details, name="details"),
     path('delete-receipe/<id>/', delete_receipe, name="delete_receipe"),
