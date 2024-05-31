@@ -4,6 +4,8 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+# from django.views.decorators.csrf import csrf_protect
 
 # Create your views here.
 
@@ -39,7 +41,7 @@ def register_page(request):
 
     return render(request, 'register.html')
 
-
+# @csrf_protect
 def login_page(request):
     if request.method == "POST":
         username = request.POST.get('username')
@@ -66,7 +68,7 @@ def logout_page(request):
     logout(request)
     return redirect('/login')
 
-
+@login_required(login_url="/login")
 def add_receipe(request):
     if request.method == "POST":
         data = request.POST
@@ -88,7 +90,7 @@ def add_receipe(request):
 #     print(receipe)
 #     return render(request, 'receipe_detail.html', context = {'receipe': receipe})
 
-
+@login_required(login_url="/login")
 def details(request):
     queryset = Receipe.objects.all()
     if request.GET.get('search'):
