@@ -41,6 +41,7 @@ def register_page(request):
 
     return render(request, 'register.html')
 
+
 # @csrf_protect
 def login_page(request):
     if request.method == "POST":
@@ -67,6 +68,7 @@ def login_page(request):
 def logout_page(request):
     logout(request)
     return redirect('/login')
+
 
 @login_required(login_url="/login")
 def add_receipe(request):
